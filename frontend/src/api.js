@@ -1,0 +1,1 @@
+const A=import.meta.env.VITE_API_URL||'http://localhost:8000';export const products=()=>fetch(A+'/api/products').then(r=>r.json());export const lead=x=>fetch(A+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(x)}).then(r=>r.json());
