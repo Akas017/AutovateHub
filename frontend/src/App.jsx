@@ -21,59 +21,66 @@ const API_URL = "http://localhost:8000";
 ========================================================= */
 
 const fallbackMotors = [
-  {
+   {
     id: 1,
-    name: "DT-52-ENSW 75/20",
+    name: "Standard Curtain Motor",
     type: "Curtain Motor",
-    capacity: "100 kg",
-    wiring: "3 Wire",
+    capacity: "Up to 100 kg",
+    wiring: "3-Wire",
     features: [
       "Remote Control",
-      "App Control",
-      "Alexa & Siri",
       "Soft Touch",
       "One Touch",
+      "Smooth Curtain Movement",
+      "Manual Override",
     ],
   },
+
   {
     id: 2,
-    name: "DT-72-TVLSW 21/4",
+    name: "Smart Curtain Motor",
     type: "Curtain Motor",
-    capacity: "100 kg",
-    wiring: "5 Wire",
+    capacity: "Up to 100 kg",
+    wiring: "5-Wire",
     features: [
       "Remote Control",
       "App Control",
-      "Alexa & Siri",
+      "Voice Control",
       "Soft Touch",
-      "Third-Party Automation",
+      "Smart Scheduling",
     ],
-  },
-  {
-    id: 3,
-    name: "DT-72-TVL5",
-    type: "Curtain Motor",
-    capacity: "100 kg",
-    wiring: "5 Wire",
-    features: [
-      "Remote Control",
-      "Third-Party Automation",
-      "Smart Home Integration",
-    ],
-  },
-  {
-    id: 4,
-    name: "DT-72-TVWL",
-    type: "Curtain Motor",
-    capacity: "100 kg",
-    wiring: "5 Wire",
-    features: [
-      "Remote Control",
-      "Zigbee",
-      "Smart Life App",
-      "Smart Home Integration",
-    ],
-  },
+    },
+
+    {
+      id: 3,
+      name: "Advanced Curtain Motor",
+      type: "Curtain Motor",
+      capacity: "Up to 100 kg",
+      wiring: "5-Wire",
+      features: [
+        "Remote Control",
+        "App Control",
+        "Voice Control",
+        "Third-Party Automation",
+        "Smart Home Integration",
+      ],
+    },
+
+    {
+      id: 4,
+      name: "Premium Smart Curtain Motor",
+      type: "Curtain Motor",
+      capacity: "Up to 100 kg",
+      wiring: "5-Wire",
+      features: [
+        "Remote Control",
+        "App Control",
+        "Voice Control",
+        "Zigbee Integration",
+        "Smart Home Integration",
+        "Smart Scheduling",
+      ],
+    },
 ];
 
 /* =========================================================
@@ -557,7 +564,78 @@ function Motors() {
           setMotors(fallbackMotors);
           setUsingFallback(true);
         } else {
-          setMotors(products);
+                  /*
+          * Keep manufacturer/model numbers private.
+          * The website only displays generic motor names.
+          */
+          const publicMotorProfiles = [
+          {
+            name: "Standard Curtain Motor",
+            type: "Curtain Motor",
+            capacity: "Up to 100 kg",
+            wiring: "3-Wire",
+            features: [
+              "Remote Control",
+              "Soft Touch",
+              "One Touch",
+              "Smooth Curtain Movement",
+              "Manual Override",
+            ],
+          },
+
+          {
+            name: "Smart Curtain Motor",
+            type: "Curtain Motor",
+            capacity: "Up to 100 kg",
+            wiring: "5-Wire",
+            features: [
+              "Remote Control",
+              "App Control",
+              "Voice Control",
+              "Soft Touch",
+              "Smart Scheduling",
+            ],
+          },
+
+          {
+            name: "Advanced Curtain Motor",
+            type: "Curtain Motor",
+            capacity: "Up to 100 kg",
+            wiring: "5-Wire",
+            features: [
+              "Remote Control",
+              "App Control",
+              "Voice Control",
+              "Third-Party Automation",
+              "Smart Home Integration",
+            ],
+          },
+
+          {
+            name: "Premium Smart Curtain Motor",
+            type: "Curtain Motor",
+            capacity: "Up to 100 kg",
+            wiring: "5-Wire",
+            features: [
+              "Remote Control",
+              "App Control",
+              "Voice Control",
+              "Zigbee Integration",
+              "Smart Home Integration",
+              "Smart Scheduling",
+            ],
+          },
+        ];
+
+        const publicMotors = products.map((motor, index) => ({
+          ...motor,
+          ...(publicMotorProfiles[index] || publicMotorProfiles[1]),
+        }));
+
+        setMotors(publicMotors);
+
+          setMotors(publicMotors);
+          // setMotors(products);
         }
 
       } catch (err) {
